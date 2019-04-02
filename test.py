@@ -6,6 +6,9 @@ import os
 import random
 import time
 
+import pprint
+from tqdm import tqdm
+
 import configs
 import backbone
 import data.feature_loader as feat_loader
@@ -47,6 +50,8 @@ def feature_evaluation(
 
 if __name__ == "__main__":
     params = parse_args("test")
+
+    pprint.pprint(params)
 
     acc_all = []
 
@@ -173,7 +178,7 @@ if __name__ == "__main__":
         )  # defaut split = novel, but you can also test base or val classes
         cl_data_file = feat_loader.init_loader(novel_file)
 
-        for i in range(iter_num):
+        for i in tqdm(range(iter_num)):
             acc = feature_evaluation(
                 cl_data_file,
                 model,
