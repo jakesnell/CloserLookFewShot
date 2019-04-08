@@ -11,7 +11,7 @@ from methods.protonet import ProtoNet
 from methods.matchingnet import MatchingNet
 from methods.relationnet import RelationNet
 from methods.maml import MAML
-from io_utils import model_dict, parse_args, get_resume_file
+from closerlook.io_utils import model_dict, parse_args, get_resume_file
 
 
 def train(
@@ -96,7 +96,7 @@ if __name__ == "__main__":
             ), "class number need to be larger than max label id in base class"
 
         if params.method == "baseline":
-            model = BaselineTrain(model_dict[params.model], params.num_classes)
+            model = BaselineTrain(model_dict[params.model], params.num_classes, cuda=params.cuda)
         elif params.method == "baseline++":
             model = BaselineTrain(
                 model_dict[params.model], params.num_classes, loss_type="dist"
@@ -165,7 +165,8 @@ if __name__ == "__main__":
     else:
         raise ValueError("Unknown method")
 
-    model = model.cuda()
+    if params.cuda:
+        model = model.cuda()
 
     params.checkpoint_dir = "%s/checkpoints/%s/%s_%s" % (
         configs.save_dir,

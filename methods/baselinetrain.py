@@ -1,7 +1,6 @@
 import backbone
 
 import torch.nn as nn
-from torch.autograd import Variable
 
 
 class BaselineTrain(nn.Module):
@@ -20,14 +19,16 @@ class BaselineTrain(nn.Module):
         self.loss_fn = nn.CrossEntropyLoss()
 
     def forward(self, x):
-        x = Variable(x.cuda())
+        if next(self.parameters()).is_cuda:
+            x = x.cuda()
         out = self.feature.forward(x)
         scores = self.classifier.forward(out)
         return scores
 
     def forward_loss(self, x, y):
         scores = self.forward(x)
-        y = Variable(y.cuda())
+        if next(self.parameters()).is_cuda:
+            y = y.cuda()
         return self.loss_fn(scores, y)
 
     def train_loop(self, epoch, train_loader, optimizer):

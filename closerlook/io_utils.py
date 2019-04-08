@@ -49,6 +49,11 @@ def parse_args(script):
         action="store_true",
         help="perform data augmentation or not during training ",
     )  # still required for save_features.py and test.py to find the model path correctly
+    parser.add_argument(
+        "--cuda",
+        action="store_true",
+        help="If true, run on GPU",
+    )
 
     if script == "train":
         parser.add_argument(

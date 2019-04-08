@@ -1,4 +1,4 @@
-save_dir                    = '/home/jake/hdd/results/CloserLookFewShot/'
+save_dir                    = '/scratch/gobi1/jsnell/results/closerlook/'
 data_dir = {}
 data_dir['CUB']             = './filelists/CUB/' 
 data_dir['miniImagenet']    = './filelists/miniImagenet/' 
