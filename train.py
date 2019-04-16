@@ -5,13 +5,13 @@ import os
 
 import configs
 import backbone
-from data.datamgr import SimpleDataManager, SetDataManager
+from closerlook.data.datamgr import SimpleDataManager, SetDataManager
+from closerlook.io_utils import model_dict, parse_args, get_resume_file
 from methods.baselinetrain import BaselineTrain
 from methods.protonet import ProtoNet
 from methods.matchingnet import MatchingNet
 from methods.relationnet import RelationNet
 from methods.maml import MAML
-from closerlook.io_utils import model_dict, parse_args, get_resume_file
 
 
 def train(
@@ -96,7 +96,7 @@ if __name__ == "__main__":
             ), "class number need to be larger than max label id in base class"
 
         if params.method == "baseline":
-            model = BaselineTrain(model_dict[params.model], params.num_classes, cuda=params.cuda)
+            model = BaselineTrain(model_dict[params.model], params.num_classes)
         elif params.method == "baseline++":
             model = BaselineTrain(
                 model_dict[params.model], params.num_classes, loss_type="dist"
