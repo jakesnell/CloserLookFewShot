@@ -1,4 +1,4 @@
-save_dir                    = '/scratch/hdd001/home/jsnell/results/closerlook/'
+save_dir                    = '/path/to/your/result/directory'
 data_dir = {}
 data_dir['CUB']             = './filelists/CUB/' 
 data_dir['miniImagenet']    = './filelists/miniImagenet/' 
